@@ -1,5 +1,6 @@
 project: "myproject"
 app_name: "myapp"
+domain: "{{app_name}}.com"
 user_home: "/home/{{user}}"
 project_home: "/srv/{{project}}"
 venv_home: "{{project_home}}/virtualenvs/{{app_name}}"

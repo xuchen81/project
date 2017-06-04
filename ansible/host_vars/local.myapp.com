@@ -1,6 +1,6 @@
 deploymenthost: "local"
 user: "vagrant"
-domain: "baseproject.com"
+server_name: "local.{{domain}}"
 
 db_name: "{{app_name}}"
 db_password: "appdMysqlTest"
