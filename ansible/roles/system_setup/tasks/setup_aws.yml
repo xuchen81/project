@@ -1,0 +1,13 @@
+---
+- name: Make sure ~/.aws folder exists.
+  file: path={{ item.d }} state=directory
+  with_items:
+    - { d: "/home/{{user}}/.aws" }
+  become: true
+
+- name: Copy .aws/credentials.
+  action:
+    module: template
+    src: aws_credentials
+    dest: /home/{{user}}/.aws/credentials
+  become: yes

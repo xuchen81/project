@@ -1,0 +1,4 @@
+---
+- include: file_structure.yml
+- include: bashrc.yml
+- include: setup_aws.yml

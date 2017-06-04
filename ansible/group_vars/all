@@ -1,0 +1,23 @@
+project: "myproject"
+app_name: "myapp"
+user_home: "/home/{{user}}"
+project_home: "/srv/{{project}}"
+venv_home: "{{project_home}}/virtualenvs/{{app_name}}"
+
+app_private: "{{project_home}}/private"
+app_public: "{{project_home}}/public"
+app_home: "{{app_private}}/{{app_name}}"
+app_static: "{{app_public}}/static"
+app_media: "{{app_public}}/media"
+
+log_dir: "/var/log/{{project}}"
+app_log: "{{log_dir}}/{{app_name}}.log"
+app_error_log: "{{log_dir}}/{{app_name}}_error.log"
+debug_log: "{{log_dir}}/{{app_name}}_debug.log"
+celery_log: "{{log_dir}}/celery.log"
+redis_log: "{{log_dir}}/redis.log"
+
+# S3
+aws_account_id: ""
+aws_access_key_id: ""
+aws_secret_access_key: ""

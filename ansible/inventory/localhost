@@ -1,0 +1,2 @@
+[webservers]
+local.myapp.com ansible_port=2208 ansible_host=localhost

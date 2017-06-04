@@ -1,0 +1,23 @@
+---
+- name: Create {{project}} directory structure.
+  file: path={{ item.d }} state=directory owner={{ item.o|default('root') }} group={{ item.g|default('root') }} mode={{ item.m|default('0755') }}
+  with_items:
+    - { d: "{{project_home}}" }
+    - { d: "{{app_private}}" }
+    - { d: "{{app_home}}" }
+    - { d: "{{venv_home}}" }
+    - { d: "{{app_public}}" }
+    - { d: "{{app_static}}" }
+    - { d: "{{app_media}}" }
+    - { d: "{{log_dir}}" }
+  become: true
+
+- name: Create log files.
+  file: path={{ item.d }} state=touch owner={{ item.o|default('root') }} group={{ item.g|default('root') }}
+  with_items:
+    - { d: "{{app_log}}" }
+    - { d: "{{app_error_log}}" }
+    - { d: "{{debug_log}}" }
+    - { d: "{{celery_log}}" }
+    - { d: "{{redis_log}}" }
+  become: true
