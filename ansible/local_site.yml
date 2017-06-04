@@ -4,3 +4,4 @@
     - system_setup
     - packages_apt
     - python_install
+    - packages_pip
