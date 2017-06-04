@@ -1,0 +1,37 @@
+---
+- name: Copy requirements to remote.
+  copy: src=../../../../requirements.txt dest=/tmp/requirements.txt
+  become: true
+
+- name: Install pip modules.
+  pip: state=present
+       requirements=/tmp/requirements.txt
+       virtualenv={{venv_home}}
+       virtualenv_command=virtualenv
+  become: true
+
+- name: Install pip modules.
+  pip: state=present
+       extra_args=--upgrade
+       requirements=/tmp/requirements.txt
+       virtualenv={{venv_home}}
+       virtualenv_command=virtualenv
+  become: true
+
+- name: Install supervisor master branch.
+  pip:
+    name: "git+https://github.com/Supervisor/supervisor.git@master#egg=supervisor"
+    state: present
+    virtualenv: "{{venv_home}}"
+    virtualenv_command: virtualenv
+  become: true
+
+- name: Install boto modules with python 2
+  pip:
+    name: "{{ item.name }}"
+    version: "{{ item.version }}"
+    state: present
+  with_items:
+    - { name: "boto", version: "2.47.0" }
+    - { name: "boto3", version: "1.4.4" }
+  when: deploymenthost != "local"
