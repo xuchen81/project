@@ -1,0 +1,35 @@
+---
+- name: Update apt cache.
+  shell: apt-get update
+  become: true
+
+- name: Install apt packages.
+  apt: name={{item}} state=installed
+  with_items:
+    - python-pip
+    - libssl-dev
+    - openssl
+    - libsqlite3-dev
+    - build-essential
+    - libmysqlclient-dev
+    - python-mysqldb
+    - libncurses5-dev
+    - python-dev
+    - libxml2-dev
+    - libxslt1-dev
+    - libffi-dev
+    - swig
+    - git
+    - ruby-dev
+    - libjpeg-dev
+    - libjpeg8-dev
+    - htop
+    - ntp
+    - unzip
+    - sendmail-bin
+    - awscli
+  become: true
+
+- name: Install virtualenv.
+  pip: name=virtualenv state=latest
+  become: true
