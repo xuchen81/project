@@ -1,0 +1,19 @@
+---
+- name: Copy app.ini.
+  template: src=app.ini dest={{project_home}}/{{app_name}}.ini
+  become: true
+
+- name: Ensure log file exists.
+  file: path={{app_log}} state=touch owner={{user}} group={{user}} mode=0644
+  become: true
+
+- name: Make sure ~/.aws folder exists.
+  file: path={{ item.d }} state=directory
+  with_items:
+    - { d: "/etc/supervisor" }
+    - { d: "/etc/supervisor/conf.d" }
+  become: true
+
+- name: Copy {{app_name}} uwsgi conf file for supervisord to use.
+  template: src=supervisor_uwsgi.conf dest=/etc/supervisor/conf.d
+  become: true
