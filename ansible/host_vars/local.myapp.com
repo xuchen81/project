@@ -23,3 +23,5 @@ env:
 
 redis_version: "3.2.9"
 redis_port: "6379"
+
+celery_processes: 1

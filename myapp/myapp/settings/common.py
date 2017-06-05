@@ -184,3 +184,11 @@ LOGGING = {
         },
     }
 }
+
+# Celery Common Config
+CELERYD_PREFETCH_MULTIPLIER = 1
+CELERY_ACKS_LATE = True
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_ACCEPT_CONTENT = ['json', 'yaml']
+CELERY_TIMEZONE = 'UTC'
+CELERY_ENABLE_UTC = True

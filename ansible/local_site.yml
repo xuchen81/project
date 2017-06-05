@@ -9,5 +9,6 @@
     - supervisord_setup
     - local_database
     - local_redis
+    - workers
     - collectstatic
     - application_restart

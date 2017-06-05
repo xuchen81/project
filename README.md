@@ -97,7 +97,7 @@ Instructions below assume you've already cloned this repo and are inside the roo
 
 1. Database:
     ```
-    mysql -u vagrant appdynamics_django < [some.sql file]
+    mysql -u vagrant myapp < [some.sql file]
     ```
 
 2. Restart the server:
@@ -106,10 +106,3 @@ Instructions below assume you've already cloned this repo and are inside the roo
     sudo service supervisord status (To check the status of web server and redis server.)
     sudo service supervisord restart (To restart both web server and redis server.)
     ```
-
-### Troubleshooting
-
-1. If you see some of the text are not in the correct position, this is because Alpasso is not setup correctly. You can fix it by:
-    * Resize the window, and all the text should go to the right place.
-    * Run portal-setup to setup portal-alpasso. (**Suggested**)
-2. You may need to remove .sass-cache/ inside the corpsite repo.
