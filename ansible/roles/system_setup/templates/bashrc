@@ -126,6 +126,6 @@ alias log_celery="tail -f {{celery_log}}"
 alias flush="redis-cli flushall"
 alias static="cd {{app_static}}"
 alias media="cd {{app_media}}"
-alias redis-cli='/usr/local/src/redis-{{ redis_version }}/src/redis-cli'"
+alias redis-cli="/usr/local/src/redis-{{ redis_version }}/src/redis-cli"
 
 source {{venv_home}}/bin/activate
