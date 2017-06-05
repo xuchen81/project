@@ -1,0 +1,2 @@
+---
+- include: supervisord_restart.yml

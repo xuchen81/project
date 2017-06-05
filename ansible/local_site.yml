@@ -7,3 +7,5 @@
     - packages_pip
     - nginx
     - supervisord_setup
+    - local_database
+    - application_restart

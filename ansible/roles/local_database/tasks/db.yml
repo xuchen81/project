@@ -1,0 +1,36 @@
+---
+- name: Copy .my.cnf.
+  template: src=my.cnf dest=/home/{{user}}/.my.cnf
+
+- name: debconf - set mysql-server password.
+  debconf: name=mysql-server question=mysql-server/root_password vtype=password value={{db_password}}
+  become: true
+
+- name: debconf - set mysql-server password again.
+  debconf: name=mysql-server-5.6 question=mysql-server/root_password_again vtype=password value={{db_password}}
+  become: true
+
+- name: Install mysql-server.
+  apt: name=mysql-server-5.6 state=installed
+  become: true
+
+- name: Setup local db.
+  mysql_db:
+    name={{db_name}}
+    login_user=root
+    login_password={{db_password}}
+    login_host={{db_hostname}}
+    state=present
+    encoding=utf8
+    collation=utf8_general_ci
+
+- name: Create mysql user.
+  mysql_user:
+    name={{user}}
+    host={{db_hostname}}
+    password={{db_password}}
+    login_user=root
+    login_password={{db_password}}
+    login_host={{db_hostname}}
+    priv=*.*:ALL
+    state=present

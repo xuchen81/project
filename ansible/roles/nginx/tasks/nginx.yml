@@ -19,13 +19,13 @@
   template: src=app_nginx.conf dest=/etc/nginx/sites-enabled/
   become: true
 
-# - name: Copy SSL cert.
-#   copy: src=certs/{{domain}}/server.crt dest=/etc/nginx/ force=true
-#   become: true
-#
-# - name: Copy SSL key.
-#   copy: src=certs/{{domain}}/server.key dest=/etc/nginx/ force=true
-#   become: true
+- name: Copy SSL cert.
+  copy: src=certs/{{domain}}/server.crt dest=/etc/nginx/ force=true
+  become: true
+
+- name: Copy SSL key.
+  copy: src=certs/{{domain}}/server.key dest=/etc/nginx/ force=true
+  become: true
 
 - name: Remove default NGINX server config.
   file: path=/etc/nginx/sites-enabled/default state=absent

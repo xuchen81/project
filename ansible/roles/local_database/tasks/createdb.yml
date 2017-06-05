@@ -1,0 +1,43 @@
+- name: Delete database.
+  mysql_db:
+    name={{db_name}}
+    login_user=root
+    login_password={{db_password}}
+    login_host={{db_hostname}}
+    state=absent
+
+- name: Setup local db.
+  mysql_db:
+    name={{db_name}}
+    login_user=root
+    login_password={{db_password}}
+    login_host={{db_hostname}}
+    state=present
+    encoding=utf8
+    collation=utf8_general_ci
+
+- name: Create mysql user.
+  mysql_user:
+    name={{user}}
+    host={{db_hostname}}
+    password={{db_password}}
+    login_user=root
+    login_password={{db_password}}
+    login_host={{db_hostname}}
+    priv=*.*:ALL
+    state=present
+
+- name: Django migrate.
+  action:
+    module: django_manage
+    command: migrate
+    app_path: "{{app_home}}"
+    virtualenv: "{{venv_home}}"
+  environment:
+    DEPLOYMENTHOST: "{{deploymenthost}}"
+    RDS_HOSTNAME: "{{db_hostname}}"
+    RDS_DB_NAME: "{{db_name}}"
+    RDS_USERNAME: "{{user}}"
+    RDS_PASSWORD: "{{db_password}}"
+    RDS_PORT: "{{db_port}}"
+  become: true

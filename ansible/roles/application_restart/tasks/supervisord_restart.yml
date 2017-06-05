@@ -1,0 +1,8 @@
+---
+- name: Restart NGINX.
+  service: name=nginx state=reloaded
+  become: true
+
+- name: Restart Supervisord.
+  service: name=supervisord state=restarted
+  become: true
