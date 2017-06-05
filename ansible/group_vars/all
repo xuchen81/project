@@ -1,9 +1,10 @@
+python_version: "3.6.1"
 project: "myproject"
 app_name: "myapp"
 domain: "{{app_name}}.com"
 user_home: "/home/{{user}}"
 project_home: "/srv/{{project}}"
-venv_home: "{{project_home}}/virtualenvs/{{app_name}}"
+venv_home: "{{project_home}}/virtualenvs/{{app_name}}-{{python_version}}"
 
 app_private: "{{project_home}}/private"
 app_public: "{{project_home}}/public"

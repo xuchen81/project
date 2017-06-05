@@ -7,7 +7,7 @@
   pip: state=present
        requirements=/tmp/requirements.txt
        virtualenv={{venv_home}}
-       virtualenv_command=virtualenv
+       virtualenv_command=venv
   become: true
 
 - name: Install pip modules.
@@ -15,7 +15,7 @@
        extra_args=--upgrade
        requirements=/tmp/requirements.txt
        virtualenv={{venv_home}}
-       virtualenv_command=virtualenv
+       virtualenv_command=venv
   become: true
 
 - name: Install supervisor master branch.
@@ -23,7 +23,7 @@
     name: "git+https://github.com/Supervisor/supervisor.git@master#egg=supervisor"
     state: present
     virtualenv: "{{venv_home}}"
-    virtualenv_command: virtualenv
+    virtualenv_command: venv
   become: true
 
 - name: Install boto modules with python 2

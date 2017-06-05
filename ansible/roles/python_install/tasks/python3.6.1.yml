@@ -1,27 +1,27 @@
 ---
 - name: Download Python 3.6.0.
-  get_url: url=https://www.python.org/ftp/python/3.6.0/Python-3.6.0.tgz
+  get_url: url=https://www.python.org/ftp/python/3.6.1/Python-3.6.1.tgz
            dest=/usr/local/src/
   become: true
 
 - name: Extract Python.
   unarchive: copy=false
-             src=/usr/local/src/Python-3.6.0.tgz
+             src=/usr/local/src/Python-3.6.1.tgz
              dest=/usr/local/src/
-             creates=/usr/local/src/Python-3.6.0/
+             creates=/usr/local/src/Python-3.6.1/
              owner={{user}}
   become: true
 
 - name: Configure Python.
-  shell: ./configure chdir=/usr/local/src/Python-3.6.0/
+  shell: ./configure chdir=/usr/local/src/Python-3.6.1/
   become: true
 
 - name: Build Python.
-  shell: make chdir=/usr/local/src/Python-3.6.0/
+  shell: make chdir=/usr/local/src/Python-3.6.1/
   become: true
 
 - name: Install Python.
-  shell: PREFIX=/usr/local make install chdir=/usr/local/src/Python-3.6.0/
+  shell: PREFIX=/usr/local make install chdir=/usr/local/src/Python-3.6.1/
   become: true
 
 - name: Create virtual environment.
