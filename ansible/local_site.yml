@@ -8,4 +8,6 @@
     - nginx
     - supervisord_setup
     - local_database
+    - local_redis
+    - collectstatic
     - application_restart

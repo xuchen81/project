@@ -1,0 +1,52 @@
+---
+- name: Ensure Redis log file exists.
+  file: path={{redis_log}} state=touch owner={{user}} group={{user}} mode=0644
+  become: true
+
+- name: Download redis.
+  get_url: url=http://download.redis.io/releases/redis-{{ redis_version }}.tar.gz
+           dest=/usr/local/src/redis-{{ redis_version }}.tar.gz
+  become: true
+
+- name: Extract Redis.
+  unarchive: copy=false
+             src=/usr/local/src/redis-{{ redis_version }}.tar.gz
+             dest=/usr/local/src/
+             creates=/usr/local/src/redis-{{ redis_version }}/
+  become: true
+
+- name: Compile Redis.
+  shell: make
+         chdir=/usr/local/src/redis-{{ redis_version }}
+         creates=/usr/local/src/redis-{{ redis_version }}/src/redis-server
+  become: true
+
+- name: Install Redis to /usr/local/bin.
+  shell: PREFIX=/usr/local make install
+         chdir=/usr/local/src/redis-{{ redis_version }}
+         creates=/usr/local/bin/redis-server
+  become: true
+
+- name: Make config directory and working directories for Redis.
+  file: path={{item}} state=directory owner={{user}}
+  with_items:
+    - /etc/redis
+    - /var/redis
+    - /var/run/redis
+    - /var/log/redis
+  become: true
+
+- name: Copy Redis config file to /etc/redis.
+  template: src=redis.conf dest=/etc/redis/redis.conf owner={{user}}
+  become: true
+
+- name: Make sure supervisor folder exists.
+  file: path={{ item.d }} state=directory
+  with_items:
+    - { d: "/etc/supervisor" }
+    - { d: "/etc/supervisor/conf.d" }
+  become: true
+
+- name: Copy redisd.conf file for supervisord to use.
+  template: src=redisd.conf dest=/etc/supervisor/conf.d
+  become: true

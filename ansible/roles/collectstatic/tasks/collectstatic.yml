@@ -1,0 +1,10 @@
+---
+- name: Run collectstatic.
+  action:
+    module: django_manage
+    command: collectstatic --noinput -i node_modules
+    app_path: "{{app_home}}"
+    settings: "{{app_name}}.settings.{{deploymenthost}}"
+    virtualenv: "{{venv_home}}"
+  environment: "{{env}}"
+  become: true

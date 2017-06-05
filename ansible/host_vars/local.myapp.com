@@ -3,7 +3,7 @@ user: "vagrant"
 server_name: "local.{{domain}}"
 
 db_name: "{{app_name}}"
-db_password: "appdMysqlTest"
+db_password: "password"
 db_hostname: "localhost"
 db_port: "3306"
 
@@ -20,3 +20,6 @@ env:
   AWS_ACCESS_KEY_ID: "{{aws_access_key_id}}"
   AWS_SECRET_ACCESS_KEY: "{{aws_secret_access_key}}"
   CELERY_HOST: "{{ansible_hostname}}"
+
+redis_version: "3.2.9"
+redis_port: "6379"
