@@ -7,7 +7,7 @@
   file: path={{app_log}} state=touch owner={{user}} group={{user}} mode=0644
   become: true
 
-- name: Make sure ~/.aws folder exists.
+- name: Make sure supervisor folder exists.
   file: path={{ item.d }} state=directory
   with_items:
     - { d: "/etc/supervisor" }

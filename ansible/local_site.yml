@@ -6,3 +6,4 @@
     - python_install
     - packages_pip
     - nginx
+    - supervisord_setup

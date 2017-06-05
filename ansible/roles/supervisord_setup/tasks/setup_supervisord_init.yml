@@ -1,0 +1,4 @@
+---
+- name: Run supervisor on start.
+  template: src=supervisord_init.sh dest=/etc/init.d/supervisord mode=0755
+  become: true

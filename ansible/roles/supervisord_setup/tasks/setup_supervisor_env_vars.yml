@@ -1,0 +1,30 @@
+---
+- name: Make sure supervisor folder exists.
+  file: path={{ item.d }} state=directory
+  with_items:
+    - { d: "/home/{{user}}/.supervisor" }
+  become: true
+
+- name: Setup supervisor environment variable file.
+  template: src=supervisor_env.conf dest=/home/{{user}}/.supervisor/environment.conf
+  become: true
+
+- name: Copy build supervisor environment script.
+  copy: src=build_supervisor_environment.sh dest=/home/{{user}}/.supervisor/build_supervisor_environment.sh mode=0755
+  become: true
+
+- name: Build supervisor environment.
+  shell: ./build_supervisor_environment.sh chdir=/home/{{user}}/.supervisor/
+  register: result
+
+- name: Update supervisord environment variables.
+  action:
+    module: lineinfile
+    dest: /etc/supervisor/supervisord.conf
+    regexp: 'environment=.* ; \(supervisord environment variables\)$'
+    line: "environment={{result.stdout}}"
+  become: true
+
+- name: Automatically schedule supervisor.
+  shell: update-rc.d supervisord defaults
+  become: true

@@ -1,0 +1,11 @@
+---
+- name: Make sure supervisor folder exists.
+  file: path={{ item.d }} state=directory
+  with_items:
+    - { d: "/etc/supervisor" }
+    - { d: "/etc/supervisor/conf.d" }
+  become: true
+
+- name: Copy supervisord.conf file to /etc.
+  copy: src=supervisord.conf dest=/etc/supervisor/supervisord.conf mode=0755
+  become: true

@@ -1,0 +1,4 @@
+---
+- include: setup_conf.yml
+- include: setup_supervisord_init.yml
+- include: setup_supervisor_env_vars.yml
