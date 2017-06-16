@@ -22,4 +22,5 @@ from reliability.views import PingView
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^ping/?$', PingView.as_view(), name='ping'),
+    url(r'^reliability/', include('reliability.urls')),
 ]
