@@ -4,9 +4,9 @@
 ### How to setup your machine for local development
 #### Requirements:
 
-##### Ansible Version 2.3.0.0 or Above.
+##### Ansible Version 2.5.4 or Above.
 
-##### Virtual Box Version 5.0.14 or Above.
+##### Virtual Box Version 5.2.12 or Above.
 
 
 You'll need to do a couple things on your machine first to get it setup for development.
@@ -15,7 +15,7 @@ Instructions below assume you've already cloned this repo and are inside the roo
 
 1. Install pip modules into virtualenv:
     ```shell
-    pip install ansible==2.3.0.0
+    pip install ansible==2.5.4
     ```
 
 2. Update /etc/hosts:
